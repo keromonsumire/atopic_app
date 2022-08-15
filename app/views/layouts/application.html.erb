@@ -20,6 +20,7 @@
           <% if user_signed_in? %>
             <%= current_user.email %>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
+            <%= link_to '部位一覧', "/regions/show" %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to 'サインアップ', new_user_registration_path %>
@@ -29,6 +30,11 @@
       </div>
     </header>
     <div class="container content">
+      <% flash.each do |key, value| %>
+        <div class="alert alert-<%= key %>"　role="alert">
+          <p> <%= value %> </p>
+        </div>
+      <% end %>
       <%= yield %>
     </div>
   </body>

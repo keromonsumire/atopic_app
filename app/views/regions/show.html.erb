@@ -1,0 +1,6 @@
+<p>region index</p>
+<% @regions.each do |region| %>
+    <p> <%= region.name %>, <%= region.interval %>, <%= region.time %></p>
+    <br>
+<% end %>
+<%= link_to "部位を追加", "/regions/new" %>
