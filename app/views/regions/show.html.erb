@@ -1,6 +1,8 @@
 <p>region index</p>
 <% @regions.each do |region| %>
-    <p> <%= region.name %>, <%= region.interval %>, <%= region.time %></p>
+    <p> <%= region.name %>, <%= region.interval %>, <%= region.time %>　<%= region.start %></p>
+    <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary"%>
+    <%= button_to "削除", "/regions/#{region.id}", method: :delete , class:"btn btn-danger"%> 
     <br>
 <% end %>
 <%= link_to "部位を追加", "/regions/new" %>

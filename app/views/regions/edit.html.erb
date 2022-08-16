@@ -1,0 +1,9 @@
+<%= form_with model: @region do |form| %>
+    <%= form.label :name, "名前" %>
+    <%= form.text_field :name %>
+    <%= form.label :interval, "頻度" %>
+    <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6] ], prompt: "塗る頻度を選択してください", class: "hoge" %>
+    <%= form.label :time, "時間帯" %>
+    <%= form.select :time, [ ["朝のみ", "morning"], ["夜のみ", "night"], ["朝夜両方", "both"] ], prompt: "塗る時間帯を選択してください", class: "hoge" %>
+    <%= form.submit %>
+<% end %>
