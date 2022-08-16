@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_065629) do
+ActiveRecord::Schema.define(version: 2022_08_16_073155) do
+
+  create_table "histories", force: :cascade do |t|
+    t.integer "region_id"
+    t.date "date"
+    t.string "time"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["region_id"], name: "index_histories_on_region_id"
+  end
 
   create_table "regions", force: :cascade do |t|
     t.string "name"
@@ -37,5 +46,6 @@ ActiveRecord::Schema.define(version: 2022_08_16_065629) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "histories", "regions"
   add_foreign_key "regions", "users"
 end
