@@ -5,13 +5,17 @@ class TopController < ApplicationController
             @user = current_user
             @regions = Region.where(user_id: @user.id)
             @regions_today_morning = []
+            @regions_today_noon = []
             @regions_today_night = []
             @regions.each do |region|
                 if (Date.current - region.start).to_i == 0 || (Date.current - region.start).to_i % (region.interval - 1) == 0 
-                    if region.time == "morning" || region.time == "both"
+                    if region.morning
                         @regions_today_morning.push(region)
                     end
-                    if region.time == "night" || region.time == "both"
+                    if region.noon
+                        @regions_today_noon.push(region)
+                    end
+                    if region.night
                         @regions_today_night.push(region)
                     end
                 end

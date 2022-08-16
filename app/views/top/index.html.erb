@@ -10,6 +10,17 @@
         <h1>朝のお薬はありません</h1>
     <% end %>
 
+    <% if @regions_today_noon %>
+        <h1>昼のお薬</h1>
+        <ul>
+            <% @regions_today_noon.each do |region| %>
+                <li> <%= region.name %> </li>
+            <% end %>
+        </ul>
+    <% else %>
+        <h1>昼のお薬はありません</h1>
+    <% end %>
+
     <% if @regions_today_night %>
         <h1>夜のお薬</h1>
         <ul>
@@ -17,6 +28,8 @@
                 <li> <%= region.name %> </li>
             <% end %>
         </ul>
+    <% else %>
+        <h1>夜のお薬はありません</h1>
     <% end %>
 <% else %>
     <h1 class="top">ログインしましょう</h1>

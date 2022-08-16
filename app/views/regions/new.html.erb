@@ -3,7 +3,11 @@
     <%= form.text_field :name %>
     <%= form.label :interval, "頻度" %>
     <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6] ], prompt: "塗る頻度を選択してください", class: "hoge" %>
-    <%= form.label :time, "時間帯" %>
-    <%= form.select :time, [ ["朝のみ", "morning"], ["夜のみ", "night"], ["朝夜両方", "both"] ], prompt: "塗る時間帯を選択してください", class: "hoge" %>
+    <%= form.label :time, "朝" %>
+    <%= form.check_box :morning ,{}, "true", "false" %>
+    <%= form.label :time, "昼" %>
+    <%= form.check_box :noon ,{}, "true", "false" %>
+    <%= form.label :time, "夜" %>
+    <%= form.check_box :night ,{}, "true", "false" %>
     <%= form.submit %>
 <% end %>

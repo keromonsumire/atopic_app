@@ -10,16 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_15_060608) do
+ActiveRecord::Schema.define(version: 2022_08_16_065629) do
 
   create_table "regions", force: :cascade do |t|
     t.string "name"
     t.integer "user_id"
     t.integer "interval"
-    t.string "time"
     t.date "start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "morning", default: false, null: false
+    t.boolean "noon", default: false, null: false
+    t.boolean "night", default: false, null: false
     t.index ["user_id"], name: "index_regions_on_user_id"
   end
 
