@@ -1,4 +1,4 @@
-<p>region index</p>
+<h1>部位一覧</h1>
 <% @regions.each do |region| %>
     <p> <%= region.name %>, <%= region.interval %>, <%= region.time %>　<%= region.start %></p>
     <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary"%>

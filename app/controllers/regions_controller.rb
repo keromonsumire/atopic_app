@@ -2,7 +2,8 @@ class RegionsController < ApplicationController
     before_action :authenticate_user!
 
     def show
-        @regions = Region.all
+        @user = current_user
+        @regions = Region.where(user_id: @user.id)
     end
 
     def new
