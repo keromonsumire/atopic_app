@@ -1,4 +1,4 @@
 class Region < ApplicationRecord
     belongs_to :user
-    has_many :historys
+    has_many :histories
 end
