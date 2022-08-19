@@ -22,6 +22,7 @@
             <%= current_user.email %>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
             <%= link_to '部位一覧', "/regions/show" %>
+            <%= link_to '記録一覧', "/histories/show" %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           <% else %>
             <%= link_to 'サインアップ', new_user_registration_path %>

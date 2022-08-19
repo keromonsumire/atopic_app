@@ -1,5 +1,22 @@
-<% @histories.each do |history| %>
-    <p><%= history.date %></p>
-    <p><%= history.time %></p>
-    <br>
-<% end %>
+<div class="history">
+    <p>3回・・・青色<span class="blue">----</span>　　2回・・・暗い水色<span class="dark-skyblue">----</span>　　 1回・・・明るい水色<span class="light-skyblue">----</span>　　</p>
+    <table class="table">
+        <tr>
+            <th>部位名</th>
+            <% @dates.each do |date| %>
+            <th> <%= date %></th>
+            <% end %>
+        </tr>
+            <% @histories.each do |history| %>
+                <tr>
+                    <% history.each_with_index do |color, index| %>
+                        <% if index == 0 %>
+                            <td> <%= color %> </td>
+                        <% else %>
+                            <td class="<%=color%>"></td>
+                        <% end %>
+                    <% end %>
+                </tr>
+            <% end %>            
+    </table>
+</div>

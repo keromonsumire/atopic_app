@@ -1,7 +1,32 @@
 class HistoriesController < ApplicationController
+    require 'date'
     before_action :authenticate_user!
     def show
-        @histories = History.all
+        days = Date.today.end_of_month.day
+        month = Date.today.month
+        @dates = []
+        (1..days).each do |day|
+            @dates.push("#{month}/#{day}")
+        end
+        @regions = Region.where(user_id: current_user.id)
+        @histories = []
+        @regions.each do |region|
+            colors = []
+            colors.push(region.name)
+            days.times do |day|
+                count = History.where(region_id: region.id, date: Date.today.beginning_of_month + day.day).count
+                if count == 0
+                    colors.push("colorless")
+                elsif count == 1
+                    colors.push("light-skyblue")
+                elsif count == 2
+                    colors.push("dark-skyblue")
+                elsif count >= 3
+                    colors.push("blue")
+                end
+            end
+            @histories.push(colors)
+        end
     end
 
     def create_morning
@@ -16,7 +41,7 @@ class HistoriesController < ApplicationController
             end
         end
         @regions_create.each do |region|
-            region.histories.create({date: Time.current, time: "morning"})
+            region.histories.create({date: Date.current, time: "morning"})
         end
         redirect_to root_path
     end
@@ -33,7 +58,7 @@ class HistoriesController < ApplicationController
             end
         end
         @regions_create.each do |region|
-            region.histories.create({date: Time.current, time: "noon"})
+            region.histories.create({date: Date.current, time: "noon"})
         end
         redirect_to root_path
     end
@@ -50,7 +75,7 @@ class HistoriesController < ApplicationController
             end
         end
         @regions_create.each do |region|
-            region.histories.create({date: Time.current, time: "night"})
+            region.histories.create({date: Date.current, time: "night"})
         end
         redirect_to root_path
     end

@@ -12,3 +12,26 @@ body{
 .content{
     padding-top:100px;
 }
+
+table, td, th { border: 2px #808080 solid; }
+
+table{
+    width:100%;
+}
+
+td {white-space: nowrap;}
+
+.light-skyblue{
+    color:#8AE7F2;
+    background-color:#8AE7F2;
+}
+
+.dark-skyblue{
+    color:#51B1EC;
+    background-color:#51B1EC;
+}
+
+.blue{
+    color:#1C63E6;
+    background-color:#1C63E6;
+}
