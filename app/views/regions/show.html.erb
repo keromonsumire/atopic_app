@@ -1,8 +1,27 @@
 <h1>部位一覧</h1>
+<%= button_to "部位を追加", "/regions/new", method: :get, class:"btn btn-info" %>
 <% @regions.each do |region| %>
-    <p> <%= region.name %>, <%= region.interval %>, <%= region.morning %>, <%= region.noon %>, <%= region.night %>, <%= region.start %></p>
-    <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary"%>
-    <%= button_to "削除", "/regions/#{region.id}", method: :delete , class:"btn btn-danger"%> 
-    <br>
+    <li class="list-group-item region-list">
+        <p> 名前：<%= region.name %> <p>
+        <p> 間隔：
+        <% if region.interval == 1 %>
+        毎日
+        <% elsif region.interval > 1 %>
+        <%= region.interval - 1%>日おき
+        <% end %>
+        </p>
+        <p> 時間帯:
+        <% if region.morning %>
+        朝&nbsp;
+        <% end %>
+        <% if region.noon %>
+        昼&nbsp;
+        <% end %>
+        <% if region.night %>
+        夜
+        <% end %>
+        </p>
+        <p> <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary btn-edit"%>
+         <%= button_to "削除", "/regions/#{region.id}", method: :delete , class:"btn btn-danger", data: {confirm: "削除しますか？　部位を削除するとその部位の過去の記録も閲覧できなくなります。"}%> </p>
+    </li>
 <% end %>
-<%= link_to "部位を追加", "/regions/new" %>

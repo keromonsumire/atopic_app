@@ -1,4 +1,14 @@
 <% if @user %>
+    <% if !@regions_yesterday_night.empty? && @check_now_morning && !@check_yesterday_night %>
+    <h1>昨晩のお薬(塗り忘れ)</h1>
+    <ul class="list-group">
+        <% @regions_yesterday_night.each do |region| %>
+            <li class="list-group-item"> <%= region.name %> </li>
+        <% end %>
+    </ul>
+    <%= button_to "昨晩の薬を塗りました！", histories_create_yesterday_night_path, method: :post, class: "btn btn-info" %>
+    <% end %>
+
     <% if !@regions_today_morning.empty? && !@check_morning %>
         <h1>朝のお薬</h1>
         <ul class="list-group">
@@ -29,7 +39,7 @@
         <%= button_to "夜の薬を塗りました！", histories_create_night_path, method: :post, class: "btn btn-info" %>
     <% end %>
     
-    <% if @check_morning.empty? && @check_noon.empty? && @check_night.empty? %>
+    <% if @check_morning && @check_noon && @check_night %>
         <h1>今日の薬は全て塗り終わりました！</h1>
     <% end %>
 <% else %>

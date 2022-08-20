@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   post '/histories/create/morning', to: 'histories#create_morning'
   post '/histories/create/noon', to: 'histories#create_noon'
   post '/histories/create/night', to: 'histories#create_night'
+  post '/histories/create/yesterday_night', to: 'histories#create_yesterday_night'
   get '/histories/show', to: 'histories#show'
   resources :regions
 end

@@ -6,13 +6,14 @@ header{
 }
 
 body{
-    background-color:#eedcb3;
+    background-color:#eee9e6;
 }
 
 .content{
     padding-top:100px;
 }
 
+/* 記録一覧　*/
 table, td, th { border: 2px #808080 solid; }
 
 table{
@@ -34,4 +35,14 @@ td {white-space: nowrap;}
 .blue{
     color:#1C63E6;
     background-color:#1C63E6;
+}
+
+/* 部位一覧　*/
+
+.region-list{
+    margin-top:10px;
+}
+
+.btn-edit{
+    margin-bottom:5px;
 }

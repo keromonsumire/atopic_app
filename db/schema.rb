@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_16_073155) do
+ActiveRecord::Schema.define(version: 2022_08_20_222253) do
 
   create_table "histories", force: :cascade do |t|
     t.integer "region_id"
@@ -18,6 +18,7 @@ ActiveRecord::Schema.define(version: 2022_08_16_073155) do
     t.string "time"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "is_yesterday", default: false, null: false
     t.index ["region_id"], name: "index_histories_on_region_id"
   end
 
