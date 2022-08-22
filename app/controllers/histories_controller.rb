@@ -2,8 +2,13 @@ class HistoriesController < ApplicationController
     require 'date'
     before_action :authenticate_user!
     def show
-        days = Date.today.end_of_month.day
-        month = Date.today.month
+        if session[:month] == nil
+            month_in_display = Date.today
+        else
+            month_in_display = Date.today >> session[:month]
+        end  
+        days = month_in_display.end_of_month.day
+        month = month_in_display.month
         @dates = []
         (1..days).each do |day|
             @dates.push("#{month}/#{day}")
@@ -14,7 +19,7 @@ class HistoriesController < ApplicationController
             colors = []
             colors.push(region.name)
             days.times do |day|
-                count = History.where(region_id: region.id, date: Date.today.beginning_of_month + day.day).count
+                count = History.where(region_id: region.id, date: month_in_display.beginning_of_month + day.day).count
                 if count == 0
                     colors.push("colorless")
                 elsif count == 1
@@ -95,5 +100,21 @@ class HistoriesController < ApplicationController
             region.histories.create({date: Date.current, time: "morning", is_yesterday: true})
         end
         redirect_to root_path
+    end
+
+    def next_month
+        if session[:month] == nil
+            session[:month] = 0
+        end
+        session[:month] += 1
+        redirect_to "/histories/show"
+    end
+
+    def prev_month
+        if session[:month] == nil
+            session[:month] = 0
+        end
+        session[:month] -= 1
+        redirect_to "/histories/show"
     end
 end

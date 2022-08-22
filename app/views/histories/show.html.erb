@@ -1,5 +1,6 @@
 <div class="history">
-    <p>3回<span class="blue">----</span>　　2回<span class="dark-skyblue">----</span>　　 1回<span class="light-skyblue">----</span>　　</p>
+    <p>3回<span class="blue">----</span>　　2回<span class="dark-skyblue">----</span>　　 1回<span class="light-skyblue">----</span>　
+    <%= link_to "前の月へ", "/histories/prev_month", method: :get %>　<%= link_to "次の月へ", "/histories/next_month", method: :get %></p>
     <table class="table">
         <tr>
             <th>部位名</th>

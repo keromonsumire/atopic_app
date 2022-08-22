@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   post '/histories/create/noon', to: 'histories#create_noon'
   post '/histories/create/night', to: 'histories#create_night'
   post '/histories/create/yesterday_night', to: 'histories#create_yesterday_night'
+  get '/histories/next_month', to: 'histories#next_month'
+  get '/histories/prev_month', to: 'histories#prev_month'
   get '/histories/show', to: 'histories#show'
   resources :regions
   post '/regions/:id/add_to_top', to: 'regions#add_to_top'
