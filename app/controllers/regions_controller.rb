@@ -1,4 +1,5 @@
 class RegionsController < ApplicationController
+    require 'date'
     before_action :authenticate_user!
 
     def show
@@ -43,6 +44,12 @@ class RegionsController < ApplicationController
         else
             flash[:danger] = "部位情報のアップデートに失敗しました"
         end
+        redirect_to "/regions/show"
+    end
+
+    def add_to_top
+        @region = Region.find(params[:id])
+        @region.update(start: Date.current)
         redirect_to "/regions/show"
     end
 end

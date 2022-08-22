@@ -8,4 +8,5 @@ Rails.application.routes.draw do
   post '/histories/create/yesterday_night', to: 'histories#create_yesterday_night'
   get '/histories/show', to: 'histories#show'
   resources :regions
+  post '/regions/:id/add_to_top', to: 'regions#add_to_top'
 end
