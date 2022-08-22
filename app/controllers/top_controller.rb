@@ -3,7 +3,7 @@ class TopController < ApplicationController
     def index
         if user_signed_in?
             @user = current_user
-            @regions = Region.where(user_id: @user.id)
+            @regions = Region.where(user_id: @user.id).order("medicin ASC")
             @regions_today_morning = []
             @regions_today_noon = []
             @regions_today_night = []
@@ -32,6 +32,7 @@ class TopController < ApplicationController
                         end
                     end
                 end   
+
                 @regions.each do |region|
                     if History.exists?(region_id: region.id, time: "morning", date: Date.current, is_yesterday:false)
                         @check_morning = true

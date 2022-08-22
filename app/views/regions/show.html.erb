@@ -2,7 +2,8 @@
 <%= button_to "部位を追加", "/regions/new", method: :get, class:"btn btn-info" %>
 <% @regions.each do |region| %>
     <li class="list-group-item region-list">
-        <p> 名前：<%= region.name %> <p>
+        <p> 部位名：<%= region.name %> <p>
+        <p> お薬名：<%= region.medicin %></p>
         <p> 間隔：
         <% if region.interval == 1 %>
         毎日

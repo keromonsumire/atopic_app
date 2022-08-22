@@ -1,6 +1,8 @@
 <%= form_with model: @region do |form| %>
-    <%= form.label :name, "名前" %>
+    <%= form.label :name, "部位名" %>
     <%= form.text_field :name %>
+    <%= form.label :medicin, "お薬名" %>
+    <%= form.text_field :medicin %>
     <%= form.label :interval, "頻度" %>
     <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6] ], prompt: "塗る頻度を選択してください", class: "hoge" %>
     <%= form.label :time, "朝" %>
