@@ -34,7 +34,7 @@ class HistoriesController < ApplicationController
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
         @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % (region.interval - 1) == 0 
+            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
                 if region.morning && !History.exists?(region_id:region.id, date:Date.current, is_yesterday:true)
                     @regions_create.push(region)
                 end
@@ -51,7 +51,7 @@ class HistoriesController < ApplicationController
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
         @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % (region.interval - 1) == 0 
+            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
                 if region.noon
                     @regions_create.push(region)
                 end
@@ -68,7 +68,7 @@ class HistoriesController < ApplicationController
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
         @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % (region.interval - 1) == 0 
+            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
                 if region.night
                     @regions_create.push(region)
                 end
@@ -85,7 +85,7 @@ class HistoriesController < ApplicationController
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
         @regions.each do |region|
-            if region.interval == 1 || (Date.current.yesterday - region.start).to_i % (region.interval - 1) == 0 
+            if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
                 if region.night
                     @regions_create.push(region)
                 end

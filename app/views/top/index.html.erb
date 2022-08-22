@@ -1,5 +1,5 @@
 <% if @user %>
-    <% if !@regions_yesterday_night.empty? && @check_now_morning && !@check_yesterday_night %>
+    <% if !@regions_yesterday_night.empty? && !@check_yesterday_night && @check_now_morning %>
     <h1>昨晩のお薬(塗り忘れ)</h1>
     <ul class="list-group">
         <% @regions_yesterday_night.each do |region| %>
