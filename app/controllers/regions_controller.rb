@@ -13,13 +13,13 @@ class RegionsController < ApplicationController
 
     def create
         @user = current_user
-        @region = @user.regions.create(params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin))
+        @region = @user.regions.create(region_params)
         @region.start = Time.current
         if @region.save
             redirect_to "/regions/show"
             flash[:success] = "新しい部位を登録しました！"
         else
-            flash[:notice] = "部位登録に失敗しました"
+            flash[:danger] = "部位登録に失敗しました"
             render 'new'
         end
     end
@@ -39,7 +39,7 @@ class RegionsController < ApplicationController
 
     def update
         @region = Region.find(params[:id])
-        if @region.update(params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin))
+        if @region.update(region_params)
             flash[:success] = "部位情報をアップデートしました"
         else
             flash[:danger] = "部位情報のアップデートに失敗しました"
@@ -51,5 +51,10 @@ class RegionsController < ApplicationController
         @region = Region.find(params[:id])
         @region.update(start: Date.current)
         redirect_to "/regions/show"
+    end
+
+    private
+    def region_params
+        params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin)
     end
 end

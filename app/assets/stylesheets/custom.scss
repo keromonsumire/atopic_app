@@ -2,9 +2,16 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
 
-/* top-page */
+
+body{
+    background-color:#eee9e6;
+    font-family: 'Kiwi Maru', serif;
+    font-size:medium;
+}
+
 .description{
     font-size:medium;
+    font-family:sans-serif;
 }
 
 /* header */
@@ -40,11 +47,6 @@
 
 .logo{
     float:left;
-}
-
-body{
-    background-color:#eee9e6;
-    font-family: 'Kiwi Maru', serif;
 }
 
 .content{

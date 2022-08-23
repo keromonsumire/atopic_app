@@ -4,7 +4,7 @@
     <%= form.label :medicin, "お薬名" %>
     <%= form.text_field :medicin %>
     <%= form.label :interval, "頻度" %>
-    <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6] ], prompt: "塗る頻度を選択してください", class: "hoge" %>
+    <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6], ["六日おき(一週間おき)", 7] ], prompt: "塗る頻度を選択してください", class: "hoge" %>
     <%= form.label :time, "朝" %>
     <%= form.check_box :morning ,{}, "true", "false" %>
     <%= form.label :time, "昼" %>

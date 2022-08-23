@@ -1,4 +1,6 @@
 class Region < ApplicationRecord
     belongs_to :user
-    has_many :histories
+    validates :name, presence: true
+    validates :interval, presence: true
+    has_many :histories, dependent: :destroy
 end

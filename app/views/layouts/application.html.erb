@@ -24,6 +24,7 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <% if user_signed_in? %>
+              <%= link_to '使い方', "/manual/description" %>
               <%= link_to '本日のお薬', root_path %>
               <%= link_to '部位一覧', "/regions/show" %>
               <%= link_to '記録一覧', "/histories/show" %>
