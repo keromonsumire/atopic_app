@@ -1,17 +1,24 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
 
 header{
     background-color:white;
 }
 
+.nav-content{
+    margin-top:12px;
+}
+
 body{
     background-color:#eee9e6;
+    font-family: 'Kiwi Maru', serif;
 }
 
 .content{
     padding-top:100px;
 }
+
 
 /* 記録一覧　*/
 table, td, th { border: 2px #808080 solid; }

@@ -16,8 +16,8 @@
   <body>
     <header class="navbar navbar-fixed-top">
       <div class="container">
+        <nav class="nav-content">
         <%= link_to "sample app", root_path, id: "logo" %>
-        <nav>
           <% if user_signed_in? %>
             <%= current_user.email %>
             <%= link_to 'プロフィール変更', edit_user_registration_path %>
