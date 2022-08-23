@@ -42,5 +42,7 @@
         <h1>今日の薬は全て塗り終わりました！</h1>
     <% end %>
 <% else %>
-    <h1 class="top">ログインしましょう</h1>
+    <h1 class="top">atoconへようこそ！</h1>
+    <p class="description">atoconは、アトピーの薬の塗布スケジュールを作成し、塗布したかどうかを記録することができるアプリです。</p>
+    <%= button_to "今すぐ登録！", new_user_registration_path, method: :get, class:"btn btn-info" %>
 <% end %>

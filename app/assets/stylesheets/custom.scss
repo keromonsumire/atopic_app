@@ -2,12 +2,44 @@
 @import "bootstrap";
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
 
-header{
-    background-color:white;
+/* top-page */
+.description{
+    font-size:medium;
+}
+
+/* header */
+.logo{
+    float:left;
+    font-size:30px;
+    color:black;
+    padding-top:10px;
+}
+
+.nav{
+  margin-top:25px;
+}
+
+.nav-link{
+  font-size:20px;
+  margin-right:5px;
+}
+
+
+#header{
+  width:100%;
+  background-color:white;
+  padding-bottom:10px;
+  border-bottom:2px solid #a9a9a9;
+  font-size:large;
 }
 
 .nav-content{
     margin-top:12px;
+    float:right;
+}
+
+.logo{
+    float:left;
 }
 
 body{

@@ -15,19 +15,25 @@
   </head>
   <body>
     <header class="navbar navbar-fixed-top">
-      <div class="container">
-        <nav class="nav-content">
-        <%= link_to "sample app", root_path, id: "logo" %>
-          <% if user_signed_in? %>
-            <%= current_user.email %>
-            <%= link_to 'プロフィール変更', edit_user_registration_path %>
-            <%= link_to '部位一覧', "/regions/show" %>
-            <%= link_to '記録一覧', "/histories/show" %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to 'サインアップ', new_user_registration_path %>
-            <%= link_to 'ログイン', new_user_session_path %>
+      <div class="container" id="header">
+        <div class="logo">
+          <%= link_to root_path do %>
+            <%= image_tag 'logo.png' %>
           <% end %>
+        </div>
+        <nav>
+          <ul class="nav navbar-nav navbar-right">
+            <% if user_signed_in? %>
+              <%= link_to '本日のお薬', root_path %>
+              <%= link_to '部位一覧', "/regions/show" %>
+              <%= link_to '記録一覧', "/histories/show" %>
+              <%= link_to 'ユーザー情報変更', edit_user_registration_path %>
+              <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <% else %>
+              <%= link_to 'アカウント登録', new_user_registration_path %>
+              <%= link_to 'ログイン', new_user_session_path %>
+            <% end %>
+          </ul>
         </nav>
       </div>
     </header>
