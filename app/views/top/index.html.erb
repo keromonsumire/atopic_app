@@ -3,7 +3,7 @@
     <h1>昨晩のお薬(塗り忘れ)</h1>
     <ul class="list-group">
         <% @regions_yesterday_night.each do |region| %>
-            <li class="list-group-item"> <%= region.name %>(<%= region.medicin%>) </li>
+            <li class="list-group-item"> <%= region.name %> </li>
         <% end %>
     </ul>
     <%= button_to "昨晩の薬を塗りました！", histories_create_yesterday_night_path, method: :post, class: "btn btn-info" %>
@@ -13,7 +13,7 @@
         <h1>朝のお薬</h1>
         <ul class="list-group">
             <% @regions_today_morning.each do |region| %>
-                <li class="list-group-item"> <%= region.name %>(<%= region.medicin%>) </li>
+                <li class="list-group-item"> <%= region.name %> </li>
             <% end %>
         </ul>
         <%= button_to "朝の薬を塗りました！", histories_create_morning_path, method: :post, class: "btn btn-info" %>
@@ -23,7 +23,7 @@
         <h1>昼のお薬</h1>
         <ul class="list-group">
             <% @regions_today_noon.each do |region| %>
-                <li class="list-group-item"> <%= region.name %>(<%= region.medicin%>)　</li>
+                <li class="list-group-item"> <%= region.name %>　</li>
             <% end %>
         </ul>
         <%= button_to "昼の薬を塗りました！", histories_create_noon_path, method: :post, class: "btn btn-info" %>
@@ -33,13 +33,12 @@
         <h1>夜のお薬</h1>
         <ul class="list-group">
             <% @regions_today_night.each do |region| %>
-                <li class="list-group-item"> <%= region.name %>(<%= region.medicin%>) </li>
+                <li class="list-group-item"> <%= region.name %> </li>
             <% end %>
         </ul>
         <%= button_to "夜の薬を塗りました！", histories_create_night_path, method: :post, class: "btn btn-info" %>
     <% end %>
-    
-    <% if @check_morning && @check_noon && @check_night %>
+    <% if (@check_morning || @regions_today_morning.empty?) && (@check_noon || @regions_today_noon.empty?) && (@check_night || @regions_today_night.empty?) %>
         <h1>今日の薬は全て塗り終わりました！</h1>
     <% end %>
 <% else %>

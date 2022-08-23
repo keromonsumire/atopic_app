@@ -38,15 +38,28 @@ class HistoriesController < ApplicationController
         @user = current_user  
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
-        @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
-                if region.morning && !History.exists?(region_id:region.id, date:Date.current, is_yesterday:true)
-                    @regions_create.push(region)
+        if Time.current.strftime("%H").to_i > 3
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
+                    if region.morning && !History.exists?(region_id:region.id, date:Date.current, is_yesterday:true)
+                        @regions_create.push(region)
+                    end
                 end
             end
-        end
-        @regions_create.each do |region|
-            region.histories.create({date: Date.current, time: "morning"})
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current, time: "morning"})
+            end
+        else
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
+                    if region.morning && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                        @regions_create.push(region)
+                    end
+                end
+            end
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current.yesterday, time: "morning"})
+            end
         end
         redirect_to root_path
     end
@@ -55,15 +68,28 @@ class HistoriesController < ApplicationController
         @user = current_user  
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
-        @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
-                if region.noon
-                    @regions_create.push(region)
+        if Time.current.strftime("%H").to_i > 3
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
+                    if region.noon
+                        @regions_create.push(region)
+                    end
                 end
             end
-        end
-        @regions_create.each do |region|
-            region.histories.create({date: Date.current, time: "noon"})
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current, time: "noon"})
+            end
+        else
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
+                    if region.noon && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                        @regions_create.push(region)
+                    end
+                end
+            end
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current.yesterday, time: "noon"})
+            end
         end
         redirect_to root_path
     end
@@ -72,15 +98,28 @@ class HistoriesController < ApplicationController
         @user = current_user  
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
-        @regions.each do |region|
-            if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
-                if region.night
-                    @regions_create.push(region)
+        if Time.current.strftime("%H").to_i > 3
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
+                    if region.night
+                        @regions_create.push(region)
+                    end
                 end
             end
-        end
-        @regions_create.each do |region|
-            region.histories.create({date: Date.current, time: "night"})
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current, time: "night"})
+            end
+        else
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
+                    if region.night && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                        @regions_create.push(region)
+                    end
+                end
+            end
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current.yesterday, time: "night"})
+            end
         end
         redirect_to root_path
     end
@@ -89,15 +128,28 @@ class HistoriesController < ApplicationController
         @user = current_user  
         @regions = Region.where(user_id: @user.id)
         @regions_create = []
-        @regions.each do |region|
-            if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
-                if region.night
-                    @regions_create.push(region)
+        if Time.current.strftime("%H").to_i > 3
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
+                    if region.night
+                        @regions_create.push(region)
+                    end
                 end
             end
-        end
-        @regions_create.each do |region|
-            region.histories.create({date: Date.current, time: "morning", is_yesterday: true})
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current, time: "morning", is_yesterday: true})
+            end
+        else
+            @regions.each do |region|
+                if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
+                    if region.morning && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                        @regions_create.push(region)
+                    end
+                end
+            end
+            @regions_create.each do |region|
+                region.histories.create({date: Date.current.yesterday, time: "morning"})
+            end
         end
         redirect_to root_path
     end
