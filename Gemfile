@@ -32,6 +32,8 @@ gem 'devise'
 # Bootstrap
 gem 'devise-bootstrap-views', '~> 1.0'
 
+gem 'net-imap'
+gem 'net-pop'
 gem 'net-smtp'
 
 group :development, :test do
