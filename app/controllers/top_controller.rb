@@ -46,7 +46,7 @@ class TopController < ApplicationController
                         if History.exists?(region_id: region.id, time: "night", date: Date.current)
                             @check_night = true
                         end    
-                        if History.exists?(region_id: region.id, time: "morning", date: Date.current, is_yesterday: true)
+                        if History.exists?(region_id: region.id, time: "morning", date: Date.current, is_yesterday: true) || History.exists?(region_id: region.id, time: "night", date: Date.current.yesterday)
                             @check_yesterday_night = true
                         end   
                         if @check_morning && @check_noon && @check_night && @check_yesterday_night
@@ -84,7 +84,7 @@ class TopController < ApplicationController
                     if History.exists?(region_id: region.id, time: "night", date: Date.current.yesterday)
                         @check_night = true
                     end    
-                    if History.exists?(region_id: region.id, time: "morning", date: Date.current - 2, is_yesterday: true)
+                    if History.exists?(region_id: region.id, time: "morning", date: Date.current.yesterday, is_yesterday: true) || History.exists?(region_id: region.id, time: "night", date: Date.current - 2)
                         @check_yesterday_night = true
                     end   
                     if @check_morning && @check_noon && @check_night && @check_yesterday_night
