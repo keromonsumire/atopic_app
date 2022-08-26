@@ -82,7 +82,7 @@ class HistoriesController < ApplicationController
         else
             @regions.each do |region|
                 if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
-                    if region.noon && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                    if region.noon 
                         @regions_create.push(region)
                     end
                 end
@@ -112,7 +112,7 @@ class HistoriesController < ApplicationController
         else
             @regions.each do |region|
                 if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
-                    if region.night && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                    if region.night 
                         @regions_create.push(region)
                     end
                 end
@@ -148,7 +148,7 @@ class HistoriesController < ApplicationController
                 end
             end
             @regions_create.each do |region|
-                region.histories.create({date: Date.current.yesterday, time: "morning"})
+                region.histories.create({date: Date.current, time: "morning"})
             end
         end
         redirect_to root_path
