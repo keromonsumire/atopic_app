@@ -49,7 +49,11 @@ class RegionsController < ApplicationController
 
     def add_to_top
         @region = Region.find(params[:id])
-        @region.update(start: Date.current)
+        if Time.current.strftime("%H").to_i > 3
+            @region.update(start: Date.current)
+        else
+            @region.update(start: Date.yesterday)
+        end
         redirect_to "/regions/show"
     end
 
