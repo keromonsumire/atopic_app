@@ -93,7 +93,7 @@ class TopController < ApplicationController
                 end
             end
             
-            if 3 < Time.current.strftime("%H").to_i && Time.current.strftime("%H").to_i < 11
+            if 3 < Time.current.strftime("%H").to_i && Time.current.strftime("%H").to_i < 12
                 @check_now_morning = true
             end
 
