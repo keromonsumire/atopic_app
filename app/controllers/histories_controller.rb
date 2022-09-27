@@ -13,7 +13,7 @@ class HistoriesController < ApplicationController
         (1..days).each do |day|
             @dates.push("#{month}/#{day}")
         end
-        @regions = Region.where(user_id: current_user.id).order("medicin ASC")
+        @regions = Region.where(user_id: current_user.id).order("interval ASC").order("name ASC")
         @histories = []
         @regions.each do |region|
             colors = []

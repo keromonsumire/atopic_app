@@ -3,7 +3,7 @@ class TopController < ApplicationController
     def index
         if user_signed_in?
             @user = current_user
-            @regions = Region.where(user_id: @user.id).order("medicin ASC")
+            @regions = Region.where(user_id: @user.id).order("medicin ASC").order("name ASC")
             @regions_today_morning = []
             @regions_today_noon = []
             @regions_today_night = []
