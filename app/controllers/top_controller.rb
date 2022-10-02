@@ -13,9 +13,7 @@ class TopController < ApplicationController
             @check_night = false
             @check_yesterday_night = false
             @check_now_morning = false
-            @check_now_midnight = false
             if Time.current.strftime("%H").to_i > 3
-                @check_now_midnight = true
                 if @regions
                     @regions.each do |region|
                         if region.interval == 1 || (Date.current - region.start).to_i % region.interval == 0 
