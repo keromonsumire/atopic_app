@@ -24,6 +24,7 @@ body{
 
 .nav{
   margin-top:25px;
+  margin-right:30%;
 }
 
 .nav-link{
@@ -87,4 +88,38 @@ td {white-space: nowrap;}
 .btn-edit{
     margin-top:5px;
     margin-bottom:5px;
+}
+
+/* 本日のお薬一覧 */
+.color-0{
+    background-color:#8869A5;
+}
+
+.color-1{
+    background-color:#C58ADE;
+}
+
+.color-2{
+    background-color:#B1BEEA;
+}
+
+.color-3{
+    background-color:#90C4E9;
+}
+
+.color-4{
+    background-color:#8095CE;
+}
+
+.medicine{
+    background-color:skyblue;
+}
+
+.center{
+    text-align:center;
+}
+
+.top-list{
+    width:25%;
+    margin-left:37.5%;
 }

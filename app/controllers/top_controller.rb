@@ -56,7 +56,7 @@ class TopController < ApplicationController
             elsif @regions
                 @regions.each do |region|
                     if region.interval == 1 || (Date.current.yesterday - region.start).to_i % region.interval == 0 
-                        if region.morning && !History.exists?(region_id:region.id, date:Date.current - 2, is_yesterday:true)
+                        if region.morning && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
                             @regions_today_morning.push(region)
                         end
                         if region.noon

@@ -1,46 +1,88 @@
 <% if @user %>
-    <% if !@regions_yesterday_night.empty? && !@check_yesterday_night && @check_now_morning %>
-    <h1>昨晩のお薬(塗り忘れ)</h1>
-    <ul class="list-group">
-        <% @regions_yesterday_night.each do |region| %>
-            <li class="list-group-item"> <%= region.name %> </li>
+<div class="container center">
+    <div class="row top-list">
+        <% if !@regions_yesterday_night.empty? && !@check_yesterday_night && @check_now_morning %>
+            <h1>昨晩のお薬(塗り忘れ)</h1>
+            <ul class="list-group">
+            <% color = nil %>
+                <% @regions_yesterday_night.each do |region| %>
+                    <% if color == nil %>
+                        <% color = region.medicin %>
+                        <li class="list-group-item medicine"> <%= color %> </li>
+                    <% end %>
+                    <% if color != region.medicin %>
+                        <% color = region.medicin %>
+                        <li class="list-group-item medicine"> <%= color %> </li>
+                    <% end %>
+                    <li class="list-group-item"> <%= region.name %> </li>
+                <% end %>
+            </ul>
+            <%= button_to "昨晩の薬を塗りました！", histories_create_yesterday_night_path, method: :post, class: "btn btn-info" %>
+            <% end %>
+
+        <% if !@regions_today_morning.empty? && !@check_morning %>   
+                <h1>朝のお薬</h1>
+                <ul class="list-group">
+                <% color = nil %>
+                    <% @regions_today_morning.each do |region| %>
+                        <% if color == nil %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <% if color != region.medicin %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <li class="list-group-item"> <%= region.name %> </li>
+                    <% end %>
+                </ul>
+                <%= button_to "朝の薬を塗りました！", histories_create_morning_path, method: :post, class: "btn btn-info" %>
         <% end %>
-    </ul>
-    <%= button_to "昨晩の薬を塗りました！", histories_create_yesterday_night_path, method: :post, class: "btn btn-info" %>
-    <% end %>
+        
+        
+        <% if !@regions_today_noon.empty? && !@check_noon %>
+                <h1>昼のお薬</h1>
+                <ul class="list-group">
+                <% color = nil %>
+                    <% @regions_today_noon.each do |region| %>
+                        <% if color == nil %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <% if color != region.medicin %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <li class="list-group-item"> <%= region.name %> </li>
+                    <% end %>
+                </ul>
+                <%= button_to "昼の薬を塗りました！", histories_create_noon_path, method: :post, class: "btn btn-info" %>
+        <% end %>
 
-    <% if !@regions_today_morning.empty? && !@check_morning %>
-        <h1>朝のお薬</h1>
-        <ul class="list-group">
-            <% @regions_today_morning.each do |region| %>
-                <li class="list-group-item"> <%= region.name %> </li>
-            <% end %>
-        </ul>
-        <%= button_to "朝の薬を塗りました！", histories_create_morning_path, method: :post, class: "btn btn-info" %>
-    <% end %>
-
-    <% if !@regions_today_noon.empty? && !@check_noon %>
-        <h1>昼のお薬</h1>
-        <ul class="list-group">
-            <% @regions_today_noon.each do |region| %>
-                <li class="list-group-item"> <%= region.name %>　</li>
-            <% end %>
-        </ul>
-        <%= button_to "昼の薬を塗りました！", histories_create_noon_path, method: :post, class: "btn btn-info" %>
-    <% end %>
-
-    <% if !@regions_today_night.empty? && !@check_night %>
-        <h1>夜のお薬</h1>
-        <ul class="list-group">
-            <% @regions_today_night.each do |region| %>
-                <li class="list-group-item"> <%= region.name %> </li>
-            <% end %>
-        </ul>
-        <%= button_to "夜の薬を塗りました！", histories_create_night_path, method: :post, class: "btn btn-info" %>
-    <% end %>
+        <% if !@regions_today_night.empty? && !@check_night %>
+                <h1>夜のお薬</h1>
+                <ul class="list-group">
+                <% color = nil %>
+                    <% @regions_today_night.each do |region| %>
+                        <% if color == nil %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <% if color != region.medicin %>
+                            <% color = region.medicin %>
+                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% end %>
+                        <li class="list-group-item"> <%= region.name %> </li>
+                    <% end %>
+                </ul>
+                <%= button_to "夜の薬を塗りました！", histories_create_night_path, method: :post, class: "btn btn-info" %>
+        <% end %>
+    </div>
     <% if (@check_morning || @regions_today_morning.empty?) && (@check_noon || @regions_today_noon.empty?) && (@check_night || @regions_today_night.empty?) %>
-        <h1>今日の薬は全て塗り終わりました！</h1>
+    <h1>今日の薬は全て塗り終わりました！</h1>
     <% end %>
+</div>
+
 <% else %>
     <h1 class="top">atoconへようこそ！</h1>
     <p class="description">atoconは、アトピーの薬の塗布スケジュールを作成し、塗布したかどうかを記録することができるアプリです。</p>
