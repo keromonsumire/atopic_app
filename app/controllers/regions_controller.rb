@@ -1,6 +1,7 @@
 class RegionsController < ApplicationController
     require 'date'
     before_action :authenticate_user!
+    before_action :correct_user, only: [:destroy, :edit, :update, :add_to_top]
 
     def show
         @user = current_user
@@ -16,7 +17,6 @@ class RegionsController < ApplicationController
         @region = @user.regions.create(region_params)
         @region.start = Date.current - 100 #作った日は必ず薬を塗る仕様
         count = 0
-        flash[:notice] = region_params
         if region_params[:morning] == "true"
             count += 1
         end
@@ -96,6 +96,14 @@ class RegionsController < ApplicationController
     private
     def region_params
         params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin)
+    end
+
+    def correct_user
+        region = Region.find(params[:id])
+        if current_user.id != region.user_id
+            redirect_to root_path 
+            flash[:danger] = "権限がありません"
+        end
     end
 
 end
