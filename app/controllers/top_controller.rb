@@ -13,21 +13,19 @@ class TopController < ApplicationController
             @check_night = false
             @check_yesterday_night = false
             @check_now_morning = false
-            if Time.current.strftime("%H").to_i > 3
+            if Time.current.strftime("%H").to_i > 3 #深夜4時以降の処理
                 if @regions
-                    @regions.each do |region|
-                        if (Date.current - region.start).to_i >= region.interval 
-                            if region.morning && !History.exists?(region_id:region.id, date:Date.current, is_yesterday:true)
-                                @regions_today_morning.push(region)
-                            end
-                            if region.noon
-                                @regions_today_noon.push(region)
-                            end
-                            if region.night
-                                @regions_today_night.push(region)
-                            end
+                    @regions.each do |region| 
+                        if ((Date.current - region.last_morning).to_i >= region.interval) && region.morning && !History.exists?(region_id:region.id, date:Date.current, is_yesterday:true)
+                            @regions_today_morning.push(region)
                         end
-                        if (Date.current.yesterday - region.start).to_i >= region.interval 
+                        if ((Date.current - region.last_noon).to_i >= region.interval) && region.noon
+                            @regions_today_noon.push(region)
+                        end
+                        if ((Date.current - region.last_night).to_i >= region.interval) && region.night
+                            @regions_today_night.push(region)
+                        end
+                        if (Date.current.yesterday - region.last_night).to_i >= region.interval 
                             if region.night
                                 @regions_yesterday_night.push(region)
                             end
@@ -53,18 +51,16 @@ class TopController < ApplicationController
                     end
                 end    
 
-            elsif @regions
-                @regions.each do |region|
-                    if (Date.current.yesterday - region.start).to_i >= region.interval 
-                        if region.morning && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
-                            @regions_today_morning.push(region)
-                        end
-                        if region.noon
-                            @regions_today_noon.push(region)
-                        end
-                        if region.night
-                            @regions_today_night.push(region)
-                        end
+            elsif @regions #深夜0時から3時59分までの処理
+                @regions.each do |region| 
+                    if ((Date.current.yesterday - region.last_morning).to_i >= region.interval) && region.morning && !History.exists?(region_id:region.id, date:Date.current.yesterday, is_yesterday:true)
+                        @regions_today_morning.push(region)
+                    end
+                    if ((Date.current.yesterday - region.last_noon).to_i >= region.interval) && region.noon
+                        @regions_today_noon.push(region)
+                    end
+                    if ((Date.current.yesterday - region.last_night).to_i >= region.interval) && region.night
+                        @regions_today_night.push(region)
                     end
                 end   
                 @regions.each do |region|

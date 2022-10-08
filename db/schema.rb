@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_08_22_092230) do
+ActiveRecord::Schema.define(version: 2022_10_08_004916) do
 
   create_table "histories", force: :cascade do |t|
     t.integer "region_id"
@@ -26,13 +26,15 @@ ActiveRecord::Schema.define(version: 2022_08_22_092230) do
     t.string "name"
     t.integer "user_id"
     t.integer "interval"
-    t.date "start"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.boolean "morning", default: false, null: false
     t.boolean "noon", default: false, null: false
     t.boolean "night", default: false, null: false
     t.string "medicin"
+    t.date "last_morning"
+    t.date "last_noon"
+    t.date "last_night"
     t.index ["user_id"], name: "index_regions_on_user_id"
   end
 

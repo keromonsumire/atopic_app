@@ -15,7 +15,9 @@ class RegionsController < ApplicationController
     def create
         @user = current_user
         @region = @user.regions.create(region_params)
-        @region.start = Date.current - 100 #作った日は必ず薬を塗る仕様
+        @region.last_morning = Date.current - 100 #作った日は必ず薬を塗る仕様
+        @region.last_noon = Date.current - 100
+        @region.last_night = Date.current - 100
         count = 0
         if region_params[:morning] == "true"
             count += 1
@@ -89,7 +91,7 @@ class RegionsController < ApplicationController
 
     def add_to_top
         @region = Region.find(params[:id])
-        @region.update(start:Date.current - 100)
+        @region.update(last_morning:Date.current - 100, last_noon:Date.current - 100, last_night:Date.current - 100)
         redirect_to "/regions/show"
     end
 
