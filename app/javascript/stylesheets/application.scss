@@ -1,7 +1,5 @@
-@import "bootstrap-sprockets";
-@import "bootstrap";
+@import "~bootstrap/scss/bootstrap.scss";
 @import url('https://fonts.googleapis.com/css2?family=Kiwi+Maru&display=swap');
-
 
 body{
     background-color:#eee9e6;
@@ -171,5 +169,3 @@ td {white-space: nowrap;}
     width:25%;
     margin-left:37.5%;
 }
-
-/* responsive */
