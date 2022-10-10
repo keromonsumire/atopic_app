@@ -1,7 +1,10 @@
 <h1>部位一覧</h1>
 <%= button_to "部位を追加", "/regions/new", method: :get, class:"btn btn-info" %>
-<div class="list-group">
-<% @regions.each do |region| %>
+<div class="container">
+<% @regions.each_with_index do |region, i| %>
+    <% if i % 6 == 0 %>
+    <div class="list-group list-group-horizontal">
+    <% end %>
     <li class="list-group-item region-list">
         <p> 部位名：<%= region.name %> <p>
         <p> お薬名：<%= region.medicin %></p>
@@ -27,5 +30,9 @@
         <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary btn-edit"%>
          <%= button_to "削除", "/regions/#{region.id}", method: :delete , class:"btn btn-danger", data: {confirm: "削除しますか？　部位を削除するとその部位の過去の記録も閲覧できなくなります。"}%> </p>
     </li>
+    <% if i % 6 == 5 || i == @regions.length.to_i - 1 %>
+    </div>
+    <% end %>
 <% end %>
+</div>
 </div>
