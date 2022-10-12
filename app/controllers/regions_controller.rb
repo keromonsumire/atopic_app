@@ -34,7 +34,7 @@ class RegionsController < ApplicationController
         elsif region_params[:interval] == ""
             flash.now[:danger] = "間隔を入力してください"
             render 'new'
-        elsif count >= 2 && region_params[:interval] >= 2
+        elsif count >= 2 && region_params[:interval].to_i >= 2
             flash.now[:danger] = "間隔を開けて塗布する場合は1日1回のスケジュールにしてください"
             render 'new'
         elsif count == 0
