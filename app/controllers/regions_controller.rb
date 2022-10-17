@@ -5,7 +5,7 @@ class RegionsController < ApplicationController
 
     def show
         @user = current_user
-        @regions = Region.where(user_id: @user.id).order("medicin ASC").order("name ASC")
+        @regions = Region.where(user_id: @user.id).order("interval ASC").order("medicin ASC")
     end
 
     def new
