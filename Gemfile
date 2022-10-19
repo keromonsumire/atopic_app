@@ -28,6 +28,11 @@ gem 'bootstrap-sass', '3.4.1'
 gem 'bootsnap', '>= 1.4.4', require: false
 # login
 gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+
+#環境変数
+gem 'dotenv-rails'
 
 # Bootstrap
 gem 'devise-bootstrap-views', '~> 1.0'
