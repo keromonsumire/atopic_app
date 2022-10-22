@@ -4,15 +4,15 @@
         <% if !@regions_yesterday_night.empty? && !@check_yesterday_night && @check_now_morning %>
             <h1>昨晩のお薬(塗り忘れ)</h1>
             <ul class="list-group">
-            <% color = nil %>
+            <% medicin = nil %>
                 <% @regions_yesterday_night.each do |region| %>
-                    <% if color == nil %>
-                        <% color = region.medicin %>
-                        <li class="list-group-item medicine"> <%= color %> </li>
+                    <% if medicin == nil %>
+                        <% medicin = region.medicin %>
+                        <li class="list-group-item medicine"> <%= medicin %> </li>
                     <% end %>
-                    <% if color != region.medicin %>
-                        <% color = region.medicin %>
-                        <li class="list-group-item medicine"> <%= color %> </li>
+                    <% if medicin != region.medicin %>
+                        <% medicin = region.medicin %>
+                        <li class="list-group-item medicine"> <%= medicin %> </li>
                     <% end %>
                     <li class="list-group-item"> <%= region.name %> </li>
                 <% end %>
@@ -23,15 +23,15 @@
         <% if !@regions_today_morning.empty? && !@check_morning %>   
                 <h1>朝のお薬</h1>
                 <ul class="list-group">
-                <% color = nil %>
+                <% medicin = nil %>
                     <% @regions_today_morning.each do |region| %>
-                        <% if color == nil %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin == nil %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
-                        <% if color != region.medicin %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin != region.medicin %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
                         <li class="list-group-item"> <%= region.name %> </li>
                     <% end %>
@@ -42,15 +42,15 @@
         <% if !@regions_today_noon.empty? && !@check_noon %>
                 <h1>昼のお薬</h1>
                 <ul class="list-group">
-                <% color = nil %>
+                <% medicin = nil %>
                     <% @regions_today_noon.each do |region| %>
-                        <% if color == nil %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin == nil %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
-                        <% if color != region.medicin %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin != region.medicin %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
                         <li class="list-group-item"> <%= region.name %> </li>
                     <% end %>
@@ -61,15 +61,15 @@
         <% if !@regions_today_night.empty? && !@check_night %>
                 <h1>夜のお薬</h1>
                 <ul class="list-group">
-                <% color = nil %>
+                <% medicin = nil %>
                     <% @regions_today_night.each do |region| %>
-                        <% if color == nil %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin == nil %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
-                        <% if color != region.medicin %>
-                            <% color = region.medicin %>
-                            <li class="list-group-item medicine"> <%= color %> </li>
+                        <% if medicin != region.medicin %>
+                            <% medicin = region.medicin %>
+                            <li class="list-group-item medicine"> <%= medicin %> </li>
                         <% end %>
                         <li class="list-group-item"> <%= region.name %> </li>
                     <% end %>
