@@ -1,9 +1,9 @@
 class RegionsController < ApplicationController
   require 'date'
   before_action :authenticate_user!
-  before_action :correct_user, only: %i[destroy edit update add_to_top]
+  before_action :correct_user, only: %i[destroy edit update add_to_top ]
 
-  def show
+  def index
     @user = current_user
     @regions = Region.where(user_id: @user.id).order('interval ASC').order('medicin ASC')
   end
@@ -35,7 +35,7 @@ class RegionsController < ApplicationController
       flash.now[:danger] = '塗る時間帯を選択してください'
       render 'new'
     elsif @region.save
-      redirect_to '/regions/show'
+      redirect_to regions_path
       flash[:success] = '新しい部位を登録しました！'
     else
       flash.now[:danger] = '部位登録に失敗しました'
@@ -49,7 +49,7 @@ class RegionsController < ApplicationController
     else
       flash[:danger] = '部位削除に失敗しました'
     end
-    redirect_to '/regions/show'
+    redirect_to regions_path
   end
 
   def edit
@@ -69,7 +69,7 @@ class RegionsController < ApplicationController
       flash.now[:danger] = '塗る時間帯を選択してください'
       render 'edit'
     elsif @region.update(region_params)
-      redirect_to '/regions/show'
+      redirect_to regions_path
       flash[:success] = '部位情報を更新しました！'
     else
       flash.now[:danger] = '部位情報のアップデートに失敗しました'
@@ -77,10 +77,29 @@ class RegionsController < ApplicationController
     end
   end
 
+  def add_interval
+    regions = Region.where(user_id:current_user.id)
+    regions.each do |region|
+      if region.morning == true && region.noon == true && region.night == true 
+        region.update(noon:false)
+      elsif region.morning == true && region.night == true
+        region.update(morning:false)
+      elsif region.morning == true && region.noon == true 
+        region.update(noon:false)
+      elsif region.noon == true && region.night == true
+        region.update(noon:false)
+      elsif region.interval < 7
+        region.increment!(:interval, 1)
+      end        
+    end
+    flash[:success] = '間隔を増加させました!'
+    redirect_to regions_path
+  end
+
   def add_to_top
     @region = Region.find(params[:id])
     @region.update(last_morning: Date.current - 100, last_noon: Date.current - 100, last_night: Date.current - 100)
-    redirect_to '/regions/show'
+    redirect_to regions_path
   end
 
   private
