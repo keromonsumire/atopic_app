@@ -1,3 +1,3 @@
 class History < ApplicationRecord
-    belongs_to :region
+  belongs_to :region
 end

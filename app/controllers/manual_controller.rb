@@ -1,5 +1,3 @@
 class ManualController < ApplicationController
-    def description
-
-    end
+  def description; end
 end
