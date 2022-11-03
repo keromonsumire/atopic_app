@@ -14,7 +14,6 @@ Rails.application.routes.draw do
   get '/histories/prev_month', to: 'histories#prev_month'
   get '/histories/show', to: 'histories#show'
   resources :regions
-  post '/regions/:id/add_to_top', to: 'regions#add_to_top'
   post '/regions/add_interval', to: 'regions#add_interval'
   post '/itches/:id/create', to: 'itches#create'
 end

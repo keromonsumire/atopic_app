@@ -96,12 +96,7 @@ class RegionsController < ApplicationController
     redirect_to regions_path
   end
 
-  def add_to_top
-    @region = Region.find(params[:id])
-    @region.update(last_morning: Date.current - 100, last_noon: Date.current - 100, last_night: Date.current - 100)
-    redirect_to regions_path
-  end
-
+  
   private
 
   def region_params
