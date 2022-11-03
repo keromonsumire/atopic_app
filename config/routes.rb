@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'itches/create'
   devise_for :users, controllers: {
     omniauth_callbacks: 'users/omniauth_callbacks'
   }
@@ -15,4 +16,5 @@ Rails.application.routes.draw do
   resources :regions
   post '/regions/:id/add_to_top', to: 'regions#add_to_top'
   post '/regions/add_interval', to: 'regions#add_interval'
+  post '/itches/:id/create', to: 'itches#create'
 end

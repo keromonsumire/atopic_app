@@ -27,15 +27,19 @@ class HistoriesController < ApplicationController
       colors = []
       colors.push(region.name)
       days.times do |day|
-        count = History.where(region_id: region.id, date: month_in_display.beginning_of_month + day.day).count
-        if count == 0
-          colors.push('colorless')
-        elsif count == 1
-          colors.push('light-skyblue')
-        elsif count == 2
-          colors.push('dark-skyblue')
-        elsif count >= 3
-          colors.push('blue')
+        if Itch.exists?(region_id: region.id, date: month_in_display.beginning_of_month + day.day)
+          colors.push('red')
+        else
+          count = History.where(region_id: region.id, date: month_in_display.beginning_of_month + day.day).count
+          if count == 0
+            colors.push('colorless')
+          elsif count == 1
+            colors.push('light-skyblue')
+          elsif count == 2
+            colors.push('dark-skyblue')
+          elsif count >= 3
+            colors.push('blue')
+          end
         end
       end
       @histories.push(colors)
