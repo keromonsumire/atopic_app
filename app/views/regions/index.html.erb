@@ -28,7 +28,7 @@
         <% end %>
         </p>
         <p> 
-        <%= button_to "かゆい😢", "/itches/#{region.id}/create", method: :post, class:"btn btn-info" %>
+        <%= button_to "かゆい", "/itches/#{region.id}/create", method: :post, class:"btn btn-info" %>
         <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary btn-edit"%>
          <%= button_to "削除", "/regions/#{region.id}", method: :delete , class:"btn btn-danger", data: {confirm: "削除しますか？　部位を削除するとその部位の過去の記録も閲覧できなくなります。"}%> </p>
     </li>
