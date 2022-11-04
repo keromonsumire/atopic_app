@@ -27,6 +27,17 @@
         夜
         <% end %>
         </p>
+        <p>プロアクティブモード:
+        <% if region.is_proactive == true %>
+        ON
+        <% else %>
+        OFF
+        <% end %>
+        </p>
+        <p>プロアクティブ間隔:
+        <% if region.is_proactive == true %>
+        <%= region.proactive_interval %> 日ごと
+        <% end %>
         <p> 
         <%= button_to "かゆい", "/itches/#{region.id}/create", method: :post, class:"btn btn-info" %>
         <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary btn-edit"%>
