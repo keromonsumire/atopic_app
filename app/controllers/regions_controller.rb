@@ -9,37 +9,49 @@ class RegionsController < ApplicationController
   end
 
   def new
-    @region = Region.new
+    @region = Region.new(session[:region] || {})
+  end
+
+  def new_reenter(msg)
+    session[:region] = @region.attributes.slice(*region_params.keys)
+    redirect_to new_region_path
+    flash[:danger] = msg
+  end
+
+  def edit_reenter(msg)
+    redirect_to edit_region_path
+    flash[:danger] = msg
   end
 
   def create
     @user = current_user
-    @region = @user.regions.create(region_params)
+    @region = @user.regions.new(region_params)
     @region.last_morning = Date.current - 100 # 作った日は必ず薬を塗る仕様
     @region.last_noon = Date.current - 100
     @region.last_night = Date.current - 100
-    count = 0
-    count += 1 if region_params[:morning] == 'true'
-    count += 1 if region_params[:noon] == 'true'
-    count += 1 if region_params[:night] == 'true'
-    if region_params[:name] == ''
-      flash.now[:danger] = '部位名を入力してください'
-      render 'new'
-    elsif region_params[:interval] == ''
-      flash.now[:danger] = '間隔を入力してください'
-      render 'new'
-    elsif count >= 2 && region_params[:interval].to_i >= 2
-      flash.now[:danger] = '間隔を開けて塗布する場合は1日1回のスケジュールにしてください'
-      render 'new'
-    elsif count == 0
-      flash.now[:danger] = '塗る時間帯を選択してください'
-      render 'new'
-    elsif @region.save
-      redirect_to regions_path
-      flash[:success] = '新しい部位を登録しました！'
+    @region.proactive_start = Date.current if region_params[:is_proactive] == 'true'
+    if region_params[:is_proactive] == 'true' && region_params[:proactive_interval] == ''
+      new_reenter('プロアクティブ間隔を入力してください')
     else
-      flash.now[:danger] = '部位登録に失敗しました'
-      render 'new'
+      count = 0
+      count += 1 if region_params[:morning] == 'true'
+      count += 1 if region_params[:noon] == 'true'
+      count += 1 if region_params[:night] == 'true'
+      if region_params[:name] == ''
+        new_reenter('部位名を入力してください')
+      elsif region_params[:interval] == ''
+        new_reenter('間隔を入力してください')
+      elsif count >= 2 && region_params[:interval].to_i >= 2
+        new_reenter('間隔を開けて塗布する場合は1日1回のスケジュールにしてください')
+      elsif count == 0
+        new_reenter('塗る時間帯を選択してください')
+      elsif @region.save
+        session.delete(:region) if session[:region]
+        redirect_to regions_path
+        flash[:success] = '新しい部位を登録しました！'
+      else
+        new_reenter('部位登録に失敗しました')
+      end
     end
   end
 
@@ -58,22 +70,23 @@ class RegionsController < ApplicationController
 
   def update
     @region = Region.find(params[:id])
-    count = 0
-    count += 1 if region_params[:morning] == 'true'
-    count += 1 if region_params[:noon] == 'true'
-    count += 1 if region_params[:night] == 'true'
-    if count >= 2 && region_params[:interval].to_i >= 2
-      flash.now[:danger] = '間隔を開けて塗布する場合は1日1回のスケジュールにしてください'
-      render 'edit'
-    elsif count == 0
-      flash.now[:danger] = '塗る時間帯を選択してください'
-      render 'edit'
-    elsif @region.update(region_params)
-      redirect_to regions_path
-      flash[:success] = '部位情報を更新しました！'
+    if region_params[:is_proactive] == 'true' && region_params[:proactive_interval] == ''
+      edit_reenter('プロアクティブ間隔を入力してください')
     else
-      flash.now[:danger] = '部位情報のアップデートに失敗しました'
-      render 'edit'
+      count = 0
+      count += 1 if region_params[:morning] == 'true'
+      count += 1 if region_params[:noon] == 'true'
+      count += 1 if region_params[:night] == 'true'
+      if count >= 2 && region_params[:interval].to_i >= 2
+        edit_reenter('間隔を開けて塗布する場合は1日1回のスケジュールにしてください')
+      elsif count == 0
+        edit_reenter('塗る時間帯を選択してください')
+      elsif @region.update(region_params)
+        redirect_to regions_path
+        flash[:success] = '部位情報を更新しました！'
+      else
+        edit_reenter('部位情報のアップデートに失敗しました')
+      end
     end
   end
 
@@ -100,7 +113,7 @@ class RegionsController < ApplicationController
   private
 
   def region_params
-    params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin)
+    params.require(:region).permit(:name, :interval, :morning, :noon, :night, :medicin, :is_proactive, :proactive_interval)
   end
 
   def correct_user

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_11_03_113201) do
+ActiveRecord::Schema.define(version: 2022_11_04_022735) do
 
   create_table "histories", force: :cascade do |t|
     t.integer "region_id"
@@ -43,6 +43,9 @@ ActiveRecord::Schema.define(version: 2022_11_03_113201) do
     t.date "last_morning"
     t.date "last_noon"
     t.date "last_night"
+    t.boolean "is_proactive", default: false, null: false
+    t.date "proactive_start"
+    t.integer "proactive_interval"
     t.index ["user_id"], name: "index_regions_on_user_id"
   end
 

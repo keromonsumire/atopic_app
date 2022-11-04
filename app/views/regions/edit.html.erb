@@ -11,5 +11,9 @@
     <%= form.check_box :noon ,{}, "true", "false" %>
     <%= form.label :time, "夜" %>
     <%= form.check_box :night ,{}, "true", "false" %>
+    <%= form.label :is_proactive, "プロアクティブモード" %>
+    <%= form.check_box :is_proactive ,{}, "true", "false" %>
+    <%= form.label :proactive_interval, "プロアクティブ間隔" %>
+    <%= form.number_field :proactive_interval, {min: 1, max:14}%>
     <%= form.submit %>
 <% end %>
