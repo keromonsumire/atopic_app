@@ -38,6 +38,12 @@
         <% if region.is_proactive == true %>
         <%= region.proactive_interval %> 日ごと
         <% end %>
+        </p>
+        <p>次回更新予定日:
+        <% if region.is_proactive == true %>
+        <%= region.proactive_start + region.proactive_interval %>
+        <% end %>       
+        </p>
         <p> 
         <%= button_to "かゆい", "/itches/#{region.id}/create", method: :post, class:"btn btn-info" %>
         <%= button_to "編集", edit_region_path(region.id), method: :get, class:"btn btn-primary btn-edit"%>

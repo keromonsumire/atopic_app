@@ -71,6 +71,7 @@ class RegionsController < ApplicationController
   def update
     @region = Region.find(params[:id])
     @proactive_check = @region.is_proactive
+    @interval = @region.interval
     if region_params[:is_proactive] == 'true' && region_params[:proactive_interval] == ''
       edit_reenter('プロアクティブ間隔を入力してください')
     else
@@ -83,9 +84,11 @@ class RegionsController < ApplicationController
       elsif count == 0
         edit_reenter('塗る時間帯を選択してください')
       elsif @region.update(region_params)
-        @region.update(proactive_start:Date.current) if region_params[:is_proactive] == 'true' && !@proactive_check
-        redirect_to regions_path
+        if (region_params[:is_proactive] == 'true' && !@proactive_check) || @interval != @region.interval
+          @region.update(proactive_start:Date.current) 
+        end
         flash[:success] = '部位情報を更新しました！'
+        redirect_to regions_path
       else
         edit_reenter('部位情報のアップデートに失敗しました')
       end
