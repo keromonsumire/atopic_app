@@ -1,19 +1,26 @@
+<div class="center">
 <%= form_with model: @region do |form| %>
     <%= form.label :name, "部位名" %>
     <%= form.text_field :name %>
+    <p></p>
     <%= form.label :medicin, "お薬名" %>
     <%= form.text_field :medicin %>
+    <p></p>
     <%= form.label :interval, "頻度" %>
     <%= form.select :interval, [ ["毎日",1], ["一日おき", 2], ["二日おき", 3 ] ,["三日おき", 4], ["四日おき", 5], ["五日おき", 6], ["六日おき(一週間おき)", 7]], prompt: "塗る頻度を選択してください", class: "hoge" %>
+    <p></p>
     <%= form.label :time, "朝" %>
     <%= form.check_box :morning ,{}, "true", "false" %>
     <%= form.label :time, "昼" %>
     <%= form.check_box :noon ,{}, "true", "false" %>
     <%= form.label :time, "夜" %>
     <%= form.check_box :night ,{}, "true", "false" %>
+    <p></p>
     <%= form.label :is_proactive, "プロアクティブモード" %>
     <%= form.check_box :is_proactive ,{}, "true", "false" %>
+    <p></p>
     <%= form.label :proactive_interval, "プロアクティブ間隔" %>
     <%= form.number_field :proactive_interval, {min: 1, max:14}%>
+    <p></p>
     <%= form.submit %>
 <% end %>

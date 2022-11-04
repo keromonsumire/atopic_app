@@ -1,6 +1,5 @@
 <h1>部位一覧</h1>
 <%= button_to "部位を追加", "/regions/new", method: :get, class:"btn btn-info" %>
-<%= button_to "全ての部位の間隔を1日増加(複数時間帯の場合は時間帯数を減少)", "/regions/add_interval", method: :post, class:"btn btn-primary" %>
 <div class="container">
 <% @regions.each_with_index do |region, i| %>
     <% if i % 6 == 0 %>
