@@ -19,7 +19,7 @@
     <%= form.label :is_proactive, "プロアクティブモード" %>
     <%= form.check_box :is_proactive ,{}, "true", "false" %>
     <p></p>
-    <%= form.label :proactive_interval, "プロアクティブ間隔" %>
+    <%= form.label :proactive_interval, "更新間隔(何日ごとに頻度を更新するか)" %>
     <%= form.number_field :proactive_interval, {min: 1, max:14}%>
     <p></p>
     <%= form.submit %>

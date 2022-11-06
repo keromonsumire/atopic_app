@@ -8,7 +8,7 @@
     <li class="list-group-item region-list">
         <p> 部位名：<%= region.name %> <p>
         <p> お薬名：<%= region.medicin %></p>
-        <p> 間隔：
+        <p> 塗布間隔：
         <% if region.interval == 1 %>
         毎日
         <% elsif region.interval > 1 %>
@@ -33,7 +33,7 @@
         OFF
         <% end %>
         </p>
-        <p>プロアクティブ間隔:
+        <p>更新間隔:
         <% if region.is_proactive == true %>
         <%= region.proactive_interval %> 日ごと
         <% end %>
